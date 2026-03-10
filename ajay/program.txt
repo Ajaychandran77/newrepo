@@ -1,0 +1,60 @@
+sudo dnf install wget unzip -y
+wget https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip
+unzip terraform_1.5.0_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+terraform -version
+
+
+nano main.tf
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+      version = ">= 2.0"
+    }
+  }
+}
+
+provider "local" {}
+
+resource "local_file" "example" {
+  filename = "lab.txt"
+  content  = "Hello DevOps Lab"
+}
+
+
+terraform init
+terraform plan
+terraform apply
+
+
+
+ls
+cat lab.txt
+
+
+
+6 ansible
+sudo dnf install ansible -y
+ansible --version
+
+
+sudo nano /etc/ansible/hosts
+
+
+//write at the bottom
+
+[local]
+localhost ansible_connection=local
+
+// check local host
+
+ansible all --list-hosts
+
+//testing
+ansible all -m ping
+
+
+
+
+
